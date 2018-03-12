@@ -1,6 +1,12 @@
 <template>
-  <div>
-    <h1 style="text-align: center">Resume</h1>    
+  <div class="blogContent">
+    <div class="content-title-box">
+      <div class="content-title-fix"></div>
+      <h1 class="text-center content-title">Resume</h1>
+    </div>
+    <div>
+
+    </div>
     <scroll-top></scroll-top>
   </div>
 </template>

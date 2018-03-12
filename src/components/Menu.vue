@@ -1,7 +1,10 @@
 <template>
-  <el-menu :router="true" mode="horizontal" class="menu" background-color="#545c64"
-    text-color="#fff" active-text-color="#ffd04b" @select="handleSelect">
-    <el-menu-item index="/" ref="home" class="home">首页</el-menu-item>
+  <el-menu :router="true" mode="horizontal" class="menu"
+    background-color="#373d41" text-color="#ffffff"
+    active-text-color="#4dd0e1" @select="handleChangeMenuStyle">
+    <el-menu-item index="/" ref="home" class="home">
+      首页
+    </el-menu-item>
     <el-submenu index="1" ref="share">
       <span slot="title">前端大牛分享</span>
       <el-menu-item index="vue">
@@ -23,9 +26,10 @@
         <i class="el-icon-message"></i><span>相册</span>
       </el-menu-item>
     </el-submenu>
-    
     <el-breadcrumb class="navbar">
-      <el-breadcrumb-item class="breadcrumb-item"><span class="breadcrumb">当前位置：{{ breadCrumb }}</span></el-breadcrumb-item>
+      <el-breadcrumb-item class="breadcrumb-item">
+        <span class="breadcrumb">当前位置：{{ breadCrumb }}</span>
+      </el-breadcrumb-item>
     </el-breadcrumb>
   </el-menu>
 </template>
@@ -40,76 +44,65 @@ export default {
     handleHome(e) {
       this.$router.push('/')
     },
-    
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-      this.handleChangeMenuStyle()
+
+    handleChangeHomeClass(style1, style2) {
+      this.$refs.home.$el.style = style1
+      this.$refs.home.$el.className = 'el-menu-item home is-active'
+      this.$refs.share.$el.childNodes[0].style = style2
+      this.$refs.share.$el.className = 'el-submenu'
+      this.$refs.personCenter.$el.childNodes[0].style = style2
+      this.$refs.personCenter.$el.className = 'el-submenu'
+    },
+    handleChangeShareClass(style1, style2) {
+      this.$refs.home.$el.style = style2
+      this.$refs.home.$el.className = 'el-menu-item home'
+      this.$refs.share.$el.childNodes[0].style = style1
+      this.$refs.share.$el.className = 'el-submenu is-active'
+      this.$refs.personCenter.$el.childNodes[0].style = style2
+      this.$refs.personCenter.$el.className = 'el-submenu'
+    },
+    handleChangePersonCenterClass(style1, style2) {
+      this.$refs.home.$el.style = style2
+      this.$refs.home.$el.className = 'el-menu-item home'
+      this.$refs.share.$el.childNodes[0].style = style2
+      this.$refs.share.$el.className = 'el-submenu'
+      this.$refs.personCenter.$el.childNodes[0].style = style1
+      this.$refs.personCenter.$el.className = 'el-submenu is-active'
     },
 
     handleChangeMenuStyle() {
-      const style = 'color: rgb(255, 208, 75); border-bottom-color: rgb(255, 208, 75); background-color: rgb(84, 92, 100);'            
+      const style1 = 'color: #4dd0e1; border-bottom-color: #4dd0e1; background-color: rgb(44, 49, 52);'
+      const style2 = 'color: #ffffff;  background-color: #373d41;'
       this.$nextTick(() => {
         switch(this.$route.path) {
           case '/': {
-            this.$refs.home.$el.className = 'el-menu-item home is-active'
-            this.$refs.share.$el.className = 'el-submenu'      
-            this.$refs.personCenter.$el.className = 'el-submenu'         
-            this.$refs.home.$el.style = style
-            this.$refs.share.$el.childNodes[0].style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            this.$refs.personCenter.$el.childNodes[0].style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'            
-            break;
+            this.handleChangeHomeClass(style1, style2)
+            break
           }
           case '/vue': {
-            this.$refs.share.$el.className = 'el-submenu is-active'
-            this.$refs.home.$el.className = 'el-menu-item home'
-            this.$refs.personCenter.$el.className = 'el-submenu'
-            this.$refs.share.$el.childNodes[0].style = style
-            this.$refs.home.$el.style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            this.$refs.personCenter.$el.childNodes[0].style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            break;
+            this.handleChangeShareClass(style1, style2)
+            break
           }
           case '/node': {
-            this.$refs.share.$el.className = 'el-submenu is-active'
-            this.$refs.home.$el.className = 'el-menu-item home'
-            this.$refs.personCenter.$el.className = 'el-submenu'
-            this.$refs.share.$el.childNodes[0].style = style
-            this.$refs.home.$el.style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            this.$refs.personCenter.$el.childNodes[0].style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            break;
+            this.handleChangeShareClass(style1, style2)
+            break
           }
           case '/react': {
-            this.$refs.share.$el.className = 'el-submenu is-active'
-            this.$refs.home.$el.className = 'el-menu-item home'
-            this.$refs.personCenter.$el.className = 'el-submenu'
-            this.$refs.share.$el.childNodes[0].style = style
-            this.$refs.home.$el.style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            this.$refs.personCenter.$el.childNodes[0].style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            break;
+            this.handleChangeShareClass(style1, style2)
+            break
           }
           case '/resume': {
-            this.$refs.personCenter.$el.className = 'el-submenu is-active'
-            this.$refs.home.$el.className = 'el-menu-item home'
-            this.$refs.share.$el.className = 'el-submenu'      
-            this.$refs.personCenter.$el.childNodes[0].style = style
-            this.$refs.home.$el.style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            this.$refs.share.$el.childNodes[0].style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            break;
+            this.handleChangePersonCenterClass(style1, style2)
+            break
           }
           case '/album': {
-            console.log(this.$refs.personCenter)
-            this.$refs.personCenter.$el.className = 'el-submenu is-active'
-            this.$refs.home.$el.className = 'el-menu-item home'
-            this.$refs.share.$el.className = 'el-submenu'      
-            this.$refs.personCenter.$el.childNodes[0].style = style
-            this.$refs.home.$el.style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            this.$refs.share.$el.childNodes[0].style = 'color: #ffffff;  background-color: rgb(84, 92, 100);'
-            break;
+            this.handleChangePersonCenterClass(style1, style2)
+            break
           }
         }
       })
     },
   },
-
 
   created() {
     this.$nextTick(() => {
@@ -118,28 +111,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.home {
-  margin-left: 40px !important;
-}
-.el-menu-item.is-active {
-  background-color: #434a50 !important;
-}
-.el-submenu.is-active .el-submenu__title {
-  background-color: #434a50 !important;
-}
-
-.navbar {
-  height: 60px;
-  float: right;
-}
-.el-breadcrumb {
-  height: 60px;
-  line-height: 60px;
-  margin-right: 40px;
-}
-.breadcrumb {
-  color: #ffffff !important;
-}
-</style>

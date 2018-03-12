@@ -1,0 +1,28 @@
+.home {
+  margin-left: 40px !important;
+  font-size: $font-size-small !important;
+  text-shadow: $black-deep -1px -1px;
+}
+.el-menu-item.is-active {
+  background-color: rgb(44, 49, 52) !important;
+}
+.el-submenu .el-submenu__title {
+  font-size: $font-size-small;
+}
+.el-submenu.is-active .el-submenu__title {
+  background-color: rgb(44, 49, 52) !important;
+}
+.el-menu--horizontal {
+  border: none !important;
+}
+
+.navbar {
+  float: right;
+  height: 60px;
+  line-height: 60px !important;
+  margin-right: 40px;
+  
+  .breadcrumb {
+    color: $white;
+  }
+}
